@@ -41,26 +41,40 @@ let picturesArray=document.getElementsByClassName("block-img-item")
 
 $ (function loadMore(){
  $('#loadMore').on("click",function (event){
+
      clicked++;
-     $("#loader").show();
+     $("#loader").show()
      $("#loadMore").hide();
-     if(clicked===1){
-         setTimeout(function () {
-             for (let index=12;index<24;index++){
-                 $(picturesArray[index]).fadeIn("slow");
+     setTimeout(()=> {
+             if (clicked === 1) {
+                 setTimeout(function () {
+                     for (let index = 12; index < 24; index++) {
+                         $(picturesArray[index]).fadeIn("slow");
+                     }
+                     $('#loadMore').show();
+                     $("#loader").hide();
+                 })
              }
-             $('#loadMore').show();
-         })
-     }
-     if(clicked===2){
-         setTimeout(function () {
-             for (let index=24;index<picturesArray.length;index++){
-                 $(picturesArray[index]).fadeIn("slow");
-                 $(picturesArray[index]).show()
+             if (clicked === 2) {
+                 setTimeout(function () {
+                     for (let index = 24; index < picturesArray.length; index++) {
+                         $(picturesArray[index]).fadeIn("slow");
+                         $(picturesArray[index]).show()
+                     }
+                     $('#loadMore').show();
+                     $("#loader").hide();
+                 })
              }
-             $('#loadMore').show();
-         })
-     }
+
+                     $('#loadMore').hide();
+                     $("#loader").hide();
+
+
+         }
+         ,2000)
+
+
+
  })
 })
 
@@ -122,5 +136,19 @@ $(function carousel() {
     $("#sliderList li").click(function() {
         hero = $(this).index();
         moveTo(hero);
+    });
+});
+jQuery(document).ready(function() {
+    var btn = $('#button');
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 300) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+    btn.on('click', function(e) {
+        e.preventDefault();
+        $('html, body').animate({scrollTop:0}, '300');
     });
 });
