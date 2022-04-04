@@ -1,5 +1,4 @@
 # theHam
-https://volodimirzhukivskyi.github.io/theHam/
 In this project I made implement layout forhomepage site.
 Used technologies: 
 -HTML,CSS
