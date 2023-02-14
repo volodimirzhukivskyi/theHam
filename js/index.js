@@ -70,16 +70,7 @@ function loadMore(element) {
     element.remove()
 
 
-
-
-
-
-
-
-
-
-
-};
+}
 
 
 function printSearchElements(categoryId) {
@@ -129,11 +120,7 @@ let swiper = new Swiper(".mySwiper", {
 
         renderBullet: function (index, className) {
             return (`<div class='${className + " custom-bullet"}'><img src=${bullet[index]}></div>`
-                // '<div class="' +
-                // className +
-                // '"><span>' +
-                // bullet[index] +
-                // "</span></div>"
+
             );
         }
     },
