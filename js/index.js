@@ -1,85 +1,92 @@
-const buttons = document.querySelectorAll('.tabs-title');
+const buttons = document.querySelectorAll(".tabs-title");
 buttons.forEach((btn) => {
-    btn.addEventListener('click', clickButton)
-})
+  btn.addEventListener("click", clickButton);
+});
 
 function clickButton(event) {
-    let buttonAtr = this.getAttribute('data-id');
-    let text = document.querySelector(`.tabs-content [data-id = ${buttonAtr}]`);
-    document.querySelector('.show').classList.remove('show');
-    text.classList.add('show');
-    document.querySelector('.tabs-title.active').classList.remove('active');
-    this.classList.add('active');
+  let buttonAtr = this.getAttribute("data-id");
+  let text = document.querySelector(`.tabs-content [data-id = ${buttonAtr}]`);
+  document.querySelector(".show").classList.remove("show");
+  text.classList.add("show");
+  document.querySelector(".tabs-title.active").classList.remove("active");
+  this.classList.add("active");
 }
 
 ///////////////////////////////////////////////////////////////////////
-const buttonsImg = document.querySelectorAll('.tabs-title-img');
+const buttonsImg = document.querySelectorAll(".tabs-title-img");
 buttonsImg.forEach((btn) => {
-    btn.addEventListener('click', clickButtonImg)
-})
+  btn.addEventListener("click", clickButtonImg);
+});
 
 function clickButtonImg(event) {
-    let buttonAtr = this.getAttribute('data-id');
-    document.querySelector('.tabs-title-img.active').classList.remove('active');
-    this.classList.add('active');
-    printSearchElements(buttonAtr);
+  let buttonAtr = this.getAttribute("data-id");
+  document.querySelector(".tabs-title-img.active").classList.remove("active");
+  this.classList.add("active");
+  printSearchElements(buttonAtr);
 }
 
 function creatArrsUrl(category, lengs) {
-    const changeStr = category.split("-").join(" ");
-    let result = [];
-    for (let i = 1; i <= lengs; i++) {
-        result.push({ url: `./img/${category}/${category}${i}.jpg`, name: changeStr })
-    }
-    ;
-    return result
+  const changeStr = category.split("-").join(" ");
+  let result = [];
+  for (let i = 1; i <= lengs; i++) {
+    result.push({
+      url: `./img/${category}/${category}${i}.jpg`,
+      name: changeStr,
+    });
+  }
+  return result;
 }
 
-
-const data = [{
-
-
+const data = [
+  {
     dataId: "GraphicDesign",
-    arr: creatArrsUrl("graphic-design", 6)
-},
-{
-
-
+    arr: creatArrsUrl("graphic-design", 6),
+  },
+  {
     dataId: "All",
-    arr: [...creatArrsUrl("graphic-design", 6),...creatArrsUrl("landing-page", 6)]
-},
-{
-
+    arr: [
+      ...creatArrsUrl("graphic-design", 6),
+      ...creatArrsUrl("landing-page", 6),
+    ],
+  },
+  {
     dataId: "LandingPages",
-    arr: creatArrsUrl("landing-page", 6)
-},
-{ dataId: "AllPics", arr: [...creatArrsUrl("graphic-design", 6),...creatArrsUrl("landing-page", 6),...creatArrsUrl("wordpress",6), ...creatArrsUrl("web-design", 6)  ] },
-{
-
+    arr: creatArrsUrl("landing-page", 6),
+  },
+  {
+    dataId: "AllPics",
+    arr: [
+      ...creatArrsUrl("graphic-design", 6),
+      ...creatArrsUrl("landing-page", 6),
+      ...creatArrsUrl("wordpress", 6),
+      ...creatArrsUrl("web-design", 6),
+    ],
+  },
+  {
     dataId: "Wordpress",
-    arr: creatArrsUrl("wordpress", 6)
-}, {
-
+    arr: creatArrsUrl("wordpress", 6),
+  },
+  {
     dataId: "WebDesign",
-    arr: creatArrsUrl("web-design", 6)
-}]
+    arr: creatArrsUrl("web-design", 6),
+  },
+];
 function loadMore(element) {
-    const allButton = document.querySelector('.tabs-title-img.active')
-    allButton.dataset.id = "AllPics"
-    printSearchElements("AllPics");
-    element.remove()
-
-
+  const allButton = document.querySelector(".tabs-title-img.active");
+  allButton.dataset.id = "AllPics";
+  printSearchElements("AllPics");
+  element.remove();
 }
-
 
 function printSearchElements(categoryId) {
-    const imgWrapper = document.querySelector(".img-content");
-    const button = document.querySelector(".load-more");
-    imgWrapper.textContent = "";
-    const currentObj = data.find(obj => obj.dataId === categoryId);
-    currentObj.arr.forEach(obj => {
-        imgWrapper.insertAdjacentHTML("afterbegin", ` <figure class="product">
+  const imgWrapper = document.querySelector(".img-content");
+  const button = document.querySelector(".load-more");
+  imgWrapper.textContent = "";
+  const currentObj = data.find((obj) => obj.dataId === categoryId);
+  currentObj.arr.forEach((obj) => {
+    imgWrapper.insertAdjacentHTML(
+      "afterbegin",
+      ` <figure class="product">
                 <img class="product-img" src= ${obj.url}>
                 <div class="hover-product">
                     <div class="hover-product-btns"><a class="product-link" href="#">
@@ -97,82 +104,96 @@ function printSearchElements(categoryId) {
                     <p class="product-text">${obj.name}</p>
 
                 </div>
-            </figure`)
-
-
-    })
-    if (categoryId === "All" && button === null) { imgWrapper.insertAdjacentHTML("afterend", `<button class="load-more" onclick="loadMore(this)"><img src="./img/icons/forma1.png" alt=""/>Load More</button>`) } else {
-        button?.remove()
-    }
+            </figure`,
+    );
+  });
+  if (categoryId === "All" && button === null) {
+    imgWrapper.insertAdjacentHTML(
+      "afterend",
+      `<button class="load-more" onclick="loadMore(this)"><img src="./img/icons/forma1.png" alt=""/>Load More</button>`,
+    );
+  } else {
+    button?.remove();
+  }
 }
 
 printSearchElements("All");
 
-let bullet = ["https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxM[…]2h8MXx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80", "https://i.pinimg.com/originals/f3/13/07/f313074df0a3210dc7ca4b7e97f7491c.jpg", "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxM[…]HxzZWFyY2h8MTJ8fHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&w=1000&q=80", "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXR8ZW58MHx8MHx8&w=1000&q=80"];
+let bullet = [
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxM[…]2h8MXx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+  "https://i.pinimg.com/originals/f3/13/07/f313074df0a3210dc7ca4b7e97f7491c.jpg",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxM[…]HxzZWFyY2h8MTJ8fHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXR8ZW58MHx8MHx8&w=1000&q=80",
+];
 let swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    centeredSlides:true,
-    loop: true,
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
+  slidesPerView: 1,
+  spaceBetween: 30,
+  centeredSlides: true,
+  loop: true,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
 
-        renderBullet: function (index, className) {
-            return (`<div class='${className + " custom-bullet"}'><img src=${bullet[index]}></div>`
-
-            );
-        }
+    renderBullet: function (index, className) {
+      return `<div class='${className + " custom-bullet"}'><img src=${
+        bullet[index]
+      }></div>`;
     },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-    }
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
 });
 
 ///////////////////////////////////////////////////////////////
-var grid = document.querySelector('.grid');
-var msnry = new Masonry( grid, {
-  // options
-  itemSelector: '.grid-item',
-  columnWidth: '.grid-sizer',
+var grid = document.querySelector(".grid");
+var msnry = new Masonry(grid, {
+  itemSelector: ".grid-item",
+  columnWidth: ".grid-sizer",
+  percentPosition: true,
   gutter: 20,
-  transitionDuration: '0.8s'
+  transitionDuration: "0.8s",
 });
-var subGrid = document.querySelector('.sub-grid');
-var msnrysub = new Masonry( subGrid, {
-    // options
-    itemSelector: '.subgrid-item',
-    gutter: 3,
-    columnWidth: '.subgrid-sizer',
-    transitionDuration: '0.2s'
-  });
-  var subGrid2 = document.querySelector('.sub-grid2');
+var subGrid = document.querySelector(".sub-grid");
+var msnrysub = new Masonry(subGrid, {
+  itemSelector: ".subgrid-item",
+  gutter: 3,
+  columnWidth: ".subgrid-sizer",
+  transitionDuration: "0.2s",
+});
+var subGrid2 = document.querySelector(".sub-grid2");
 
-  var msnrysub2=new Masonry( subGrid2, {
-    // options
-    itemSelector: '.subgrid-item2',
-    gutter: 3,
-    columnWidth: '.subgrid-sizer2',
-    transitionDuration: '0.2s'
-  });
-  ////////////////////////////////////////////////////////////////
-  const btnMasonry = document.querySelector(".add-masonry-items");
-  btnMasonry.addEventListener( 'click', function() {
-    // create new item elements
-    var elems = [];
-    var fragment = document.createDocumentFragment();
-    for ( var i = 22; i < 25; i++ ) {
-     const img= document.createElement('img');
-     img.src=`../img/gallery/gallery${i}.jpg`;
-     const gridItem= document.createElement('div');
-     gridItem.className='grid-item';
-     gridItem.append(img);
-     grid.appendChild( gridItem );
-      elems.push( gridItem );
-    }
-    // append elements to container
-
-    // add and lay out newly appended elements
-    msnry.appended( elems );
+var msnrysub2 = new Masonry(subGrid2, {
+  itemSelector: ".subgrid-item2",
+  gutter: 3,
+  columnWidth: ".subgrid-sizer2",
+  transitionDuration: "0.2s",
+});
+////////////////////////////////////////////////////////////////
+const btnMasonry = document.querySelector(".add-masonry-items");
+btnMasonry.addEventListener("click", function () {
+  var elems = [];
+  var fragment = document.createDocumentFragment();
+  for (var i = 1; i < 5; i++) {
+    var elem = getItemElement(i);
+    fragment.appendChild(elem)
+    elems.push(elem);
+  }
+  grid.appendChild(fragment);
+  msnry.appended(elems);
+  btnMasonry.remove()
+});
+function getItemElement(i) {
+    var elem = document.createElement('div');
+    const img = document.createElement("img");
+    img.src = `../img/gallery/gallery${i}.jpg`;
+    console.log(img.style.width);
+    elem.append(img)
+    elem.className = 'grid-item '
+    return elem;
+  }
+////////////////////////////////////////////////////////////////////
+imagesLoaded( grid ).on( 'progress', function() {
+    msnry.layout();
   });
