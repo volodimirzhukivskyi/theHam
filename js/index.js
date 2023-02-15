@@ -110,7 +110,7 @@ function printSearchElements(categoryId) {
   if (categoryId === "All" && button === null) {
     imgWrapper.insertAdjacentHTML(
       "afterend",
-      `<button class="load-more" onclick="loadMore(this)"><img src="./img/icons/forma1.png" alt=""/>Load More</button>`,
+      `<button class="button-add load-more" onclick="loadMore(this)"><img src="./img/icons/forma1.png" alt=""/>Load More</button>`,
     );
   } else {
     button?.remove();
