@@ -177,23 +177,48 @@ btnMasonry.addEventListener("click", function () {
   var fragment = document.createDocumentFragment();
   for (var i = 1; i < 5; i++) {
     var elem = getItemElement(i);
-    fragment.appendChild(elem)
+    fragment.appendChild(elem);
     elems.push(elem);
   }
   grid.appendChild(fragment);
   msnry.appended(elems);
-  btnMasonry.remove()
+  btnMasonry.remove();
 });
 function getItemElement(i) {
-    var elem = document.createElement('div');
-    const img = document.createElement("img");
-    img.src = `../img/gallery/gallery${i}.jpg`;
-    console.log(img.style.width);
-    elem.append(img)
-    elem.className = 'grid-item '
-    return elem;
-  }
+  var elem = document.createElement("div");
+  elem.innerHTML=
+    `<div class="hide_block">
+    <div class="hover_icon">
+      <i class="fa fa-search fa-search-circle"></i>
+    </div>
+    <div class="hover_icon">
+      <i class="fas fa-arrows-alt fa-arrows-alt-personal"></i>
+    </div>
+  </div>
+  <img src="./img/gallery/gallery${i}.jpg" alt="" />`,
+
+  elem.className = "grid-item ";
+  return elem;
+}
 ////////////////////////////////////////////////////////////////////
-imagesLoaded( grid ).on( 'progress', function() {
-    msnry.layout();
-  });
+imagesLoaded(grid).on("progress", function () {
+  msnry.layout();
+});
+//////////////////////////////////////////////////////////////////
+grid.addEventListener("click", function (event) {
+  if ( event.target.tagName!=="I" ) {
+    return;
+  }
+  const selectors = ["subgrid-item2","subgrid-item","grid-item"];
+for (const selector of selectors) {
+  const parent = event.target.closest(`.${selector}`)
+if(parent){
+  parent.classList.toggle(`${selector}--gigante`);
+  break;
+}
+}
+
+  msnry.layout();
+  msnrysub.layout();
+  msnrysub2.layout();
+});
