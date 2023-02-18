@@ -107,15 +107,21 @@ body {
 }
 .btn-green {
   background-color: #18cfab;
+  transition: all 0.5s ease-out;
 }
 .btn-blue {
   background-color: #00cbf6;
+  transition: all 0.5s ease-out;
 }
 .btn-green:hover {
+  transition: background 0.2s ease-in;
+  transition: box-shadow 0.5s ease-out;
   box-shadow: 0 -4px 0 0 black;
   background: #1d7b69;
 }
 .btn-blue:hover {
+  transition: background 0.2s ease-in;
+  transition: box-shadow 0.5s ease-out;
   box-shadow: 0 -4px 0 0 black;
   background: #157184;
 }
@@ -283,6 +289,7 @@ body {
   justify-content: center;
 }
 .product {
+  position: relative;
   width: 285px;
   height: 210px;
 }
@@ -292,14 +299,20 @@ body {
 }
 .product:hover .hover-product {
   display: block;
+  animation: myship 1s;
 }
 .hover-product {
+  position: absolute;
+  left: 0;
+  right: 0;
+  animation: myship 1s;
   text-align: center;
   border-top: 3px solid #18cfab;
   padding-top: 42px;
   display: none;
 }
 .product-link {
+  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -357,7 +370,7 @@ body {
 .button-add > img {
   margin-right: 5px;
 }
-.link-news {
+​ .link-news {
   display: flex;
   flex-direction: column;
   width: 263px;
@@ -375,8 +388,11 @@ body {
   color: #777777;
   margin-left: 15px;
 }
+article{
+  position: relative;
+}
 .hide-block {
-  width: 70px;
+    width: 70px;
   height: 70px;
   text-align: center;
   background: #717171;
@@ -397,6 +413,7 @@ body {
   padding-top: 82px;
 }
 .link-news:hover .hide-block {
+  transition: all 0.5s ease-in-out;
   background: #18cfab;
 }
 .link-news:hover .title-news {
@@ -622,7 +639,8 @@ body {
   width: 600px;
   z-index: 2;
 }
-.subgrid-item2--gigante,.subgrid-item--gigante {
+.subgrid-item2--gigante,
+.subgrid-item--gigante {
   height: 300px;
   width: 363px;
   z-index: 2;
@@ -655,7 +673,30 @@ body {
   padding: 8px;
   background-color: #14b9d5;
 }
-.hover_icon:first-child{
+.hover_icon:first-child {
   margin-right: 10px;
-
+}
+@keyframes myship {
+  from {
+    left: 480px;
+  }
+  to {
+    left: 20px;
+  }
+}
+@-moz-keyframes myship {
+  from {
+    left: 480px;
+  }
+  to {
+    left: 20px;
+  }
+}
+@-webkit-keyframes myship {
+  from {
+    left: 480px;
+  }
+  to {
+    left: 20px;
+  }
 }
