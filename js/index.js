@@ -72,10 +72,18 @@ const data = [
   },
 ];
 function loadMore(element) {
-  const allButton = document.querySelector(".tabs-title-img.active");
-  allButton.dataset.id = "AllPics";
-  printSearchElements("AllPics");
-  element.remove();
+  console.log(this);
+  const loaderIcon = element.querySelector("I");
+  const img = element.querySelector("IMG");
+  loaderIcon.style.cssText="display:block;margin-right:5px";
+  img.style.display="none";
+  setTimeout(() => {
+    loaderIcon.style.display="none";
+    const allButton = document.querySelector(".tabs-title-img.active");
+    allButton.dataset.id = "AllPics";
+    printSearchElements("AllPics");
+    element.remove();
+  }, 3000);
 }
 
 function printSearchElements(categoryId) {
@@ -110,7 +118,8 @@ function printSearchElements(categoryId) {
   if (categoryId === "All" && button === null) {
     imgWrapper.insertAdjacentHTML(
       "afterend",
-      `<button class="button-add load-more" onclick="loadMore(this)"><img src="./img/icons/forma1.png" alt=""/>Load More</button>`,
+
+      `<button class="button-add load-more" onclick="loadMore(this)"><i class="fa fa-refresh fa-spin"></i> <img src="./img/icons/forma1.png" alt=""/>Load More</button>`,
     );
   } else {
     button?.remove();
@@ -186,8 +195,7 @@ btnMasonry.addEventListener("click", function () {
 });
 function getItemElement(i) {
   var elem = document.createElement("div");
-  elem.innerHTML=
-    `<div class="hide_block">
+  (elem.innerHTML = `<div class="hide_block">
     <div class="hover_icon">
       <i class="fa fa-search fa-search-circle"></i>
     </div>
@@ -195,9 +203,8 @@ function getItemElement(i) {
       <i class="fas fa-arrows-alt fa-arrows-alt-personal"></i>
     </div>
   </div>
-  <img src="./img/gallery/gallery${i}.jpg" alt="" />`,
-
-  elem.className = "grid-item ";
+  <img src="./img/gallery/gallery${i}.jpg" alt="" />`),
+    (elem.className = "grid-item ");
   return elem;
 }
 ////////////////////////////////////////////////////////////////////
@@ -206,17 +213,17 @@ imagesLoaded(grid).on("progress", function () {
 });
 //////////////////////////////////////////////////////////////////
 grid.addEventListener("click", function (event) {
-  if ( event.target.tagName!=="I" ) {
+  if (event.target.tagName !== "I") {
     return;
   }
-  const selectors = ["subgrid-item2","subgrid-item","grid-item"];
-for (const selector of selectors) {
-  const parent = event.target.closest(`.${selector}`)
-if(parent){
-  parent.classList.toggle(`${selector}--gigante`);
-  break;
-}
-}
+  const selectors = ["subgrid-item2", "subgrid-item", "grid-item"];
+  for (const selector of selectors) {
+    const parent = event.target.closest(`.${selector}`);
+    if (parent) {
+      parent.classList.toggle(`${selector}--gigante`);
+      break;
+    }
+  }
 
   msnry.layout();
   msnrysub.layout();

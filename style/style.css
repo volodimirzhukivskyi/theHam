@@ -370,6 +370,9 @@ body {
 .button-add > img {
   margin-right: 5px;
 }
+.fa.fa-refresh{
+  display: none;
+}
 ​ .link-news {
   display: flex;
   flex-direction: column;
