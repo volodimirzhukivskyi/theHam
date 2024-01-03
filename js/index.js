@@ -232,6 +232,6 @@ const button = e.target.closest(".navigation__button")
 const menu = document.querySelector('.navigation');
 
 button.classList.toggle('active');
-const method =button.classList.contain("active")?"add":"remove"
+const method =button.classList.contains("active")?"add":"remove"
 menu.classList[method]('active');
 });
